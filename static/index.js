@@ -465,11 +465,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'turtle';
-        Sk.TurtleGraphics.assets = {};
-        // Pre-load robot shape
-        var robotImg = new Image();
-        robotImg.src = './static/robot.png';
-        Sk.TurtleGraphics.assets['robot'] = robotImg;
 
         Sk.misceval.asyncToPromise(function() {
             return Sk.importMainWithBody('<stdin>', false, code, true);
