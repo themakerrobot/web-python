@@ -165,20 +165,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================
     const EXAMPLES = {
         hello: `# Hello World!\nprint("안녕하세요!")\nprint("Python에 오신 것을 환영합니다!")`,
-
         input: `# 입력(input) 예제\nname = input("이름을 입력하세요: ")\nage = input("나이를 입력하세요: ")\nprint(name + "님, 안녕하세요!")\nprint("내년에는 " + str(int(age) + 1) + "살이 되시네요!")`,
-
-        loop: `# 구구단 출력\nfor i in range(1, 10):\n    for j in range(1, 10):\n        result = str(i) + " x " + str(j) + " = " + str(i * j).rjust(2)\n        print(result, end="  ")\n    print()`,
-
+        loop: `# 구구단 출력\nfor i in range(1, 10):\n    for j in range(1, 10):\n        v = i * j\n        if v < 10:\n            v = " " + str(v)\n        else:\n            v = str(v)\n        print(str(i) + " x " + str(j) + " = " + v, end="  ")\n    print()`,
         function: `# 함수 예제\ndef greet(name, count=3):\n    for i in range(count):\n        print(str(i + 1) + "번째 인사: 안녕, " + name + "!")\n\ngreet("파이썬")\nprint("---")\ngreet("코딩", 2)`,
-
         list: `# 리스트 예제\nfruits = ["사과", "바나나", "체리", "딸기", "포도"]\n\nprint("== 과일 목록 ==")\nfor i in range(len(fruits)):\n    print("  " + str(i + 1) + ". " + fruits[i])\n\nprint("")\nprint("총 " + str(len(fruits)) + "개의 과일이 있습니다.")\nprint("첫 번째: " + fruits[0])\nprint("마지막: " + fruits[-1])\n\n# 리스트 컴프리헨션\nlong_fruits = [x for x in fruits if len(x) >= 2]\nprint("")\nprint("2글자 이상 과일: " + str(long_fruits))`,
-
         turtle: `# 거북이 그래픽 - 다각형\nimport turtle\n\nt = turtle.Turtle()\nt.speed(8)\n\ncolors = ["red", "blue", "green", "orange", "purple", "cyan"]\n\nfor i in range(6):\n    t.pencolor(colors[i])\n    t.pensize(3)\n    sides = i + 3\n    for j in range(sides):\n        t.forward(60)\n        t.left(360 / sides)\n    t.penup()\n    t.forward(80)\n    t.pendown()`,
-
         turtle2: `# 거북이 그래픽 - 컬러 나선\nimport turtle\n\nt = turtle.Turtle()\nt.speed(0)\n\nfor i in range(200):\n    r = i * 255 // 200\n    g = (200 - i) * 255 // 200\n    b = 128\n    t.pencolor(r / 255.0, g / 255.0, b / 255.0)\n    t.pensize(max(1, i // 40))\n    t.forward(i * 0.8)\n    t.left(59)`,
-
-        game: `# 숫자 맞추기 게임\nimport random\n\nprint("=== 숫자 맞추기 게임 ===")\nprint("1부터 20 사이의 숫자를 맞춰보세요!")\nprint("")\n\nanswer = random.randint(1, 20)\ntries = 0\n\nwhile True:\n    tries = tries + 1\n    guess = int(input("[" + str(tries) + "번째 시도] 숫자를 입력하세요: "))\n    \n    if guess < answer:\n        print("  ↑ 더 큰 숫자입니다!")\n    elif guess > answer:\n        print("  ↓ 더 작은 숫자입니다!")\n    else:\n        print("")\n        print("정답! " + str(tries) + "번 만에 맞추셨습니다!")\n        break`
+        game: `# 숫자 맞추기 게임\nimport random\n\nprint("=== 숫자 맞추기 게임 ===")\nprint("1부터 20 사이의 숫자를 맞춰보세요!")\nprint("")\n\nanswer = random.randint(1, 20)\ntries = 0\n\nwhile True:\n    tries = tries + 1\n    guess = int(input("[" + str(tries) + "번째 시도] 숫자: "))\n    \n    if guess < answer:\n        print("  >> 더 큰 숫자입니다!")\n    elif guess > answer:\n        print("  >> 더 작은 숫자입니다!")\n    else:\n        print("")\n        print("정답! " + str(tries) + "번 만에 맞추셨습니다!")\n        break`
     };
 
     examplesBtn.addEventListener('click', (e) => {
