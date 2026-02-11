@@ -225,12 +225,9 @@ document.addEventListener('DOMContentLoaded', () => {
             '# 거북이 그래픽 - 다각형',
             'import turtle',
             '',
-            'screen = turtle.Screen()',
-            'screen.register_shape("robot")',
             't = turtle.Turtle()',
             't.shape("robot")',
             't.speed(8)',
-            '',
             'colors = ["red", "blue", "green", "orange", "purple", "cyan"]',
             '',
             'for i in range(6):',
@@ -249,8 +246,6 @@ document.addEventListener('DOMContentLoaded', () => {
             '# 거북이 그래픽 - 컬러 나선',
             'import turtle',
             '',
-            'screen = turtle.Screen()',
-            'screen.register_shape("robot")',
             't = turtle.Turtle()',
             't.shape("robot")',
             't.speed(0)',
@@ -470,7 +465,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'turtle';
-        Sk.TurtleGraphics.assets = { "robot": "./static/robot.png" };
+        Sk.TurtleGraphics.assets = {};
+        // Pre-load robot shape
+        var robotImg = new Image();
+        robotImg.src = './static/robot.png';
+        Sk.TurtleGraphics.assets['robot'] = robotImg;
 
         Sk.misceval.asyncToPromise(function() {
             return Sk.importMainWithBody('<stdin>', false, code, true);
