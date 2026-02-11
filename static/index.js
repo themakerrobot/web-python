@@ -166,19 +166,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const EXAMPLES = {
         hello: `# Hello World!\nprint("안녕하세요!")\nprint("Python에 오신 것을 환영합니다!")`,
 
-        input: `# 입력(input) 예제\n이름 = input("이름을 입력하세요: ")\n나이 = input("나이를 입력하세요: ")\nprint(이름 + "님, 안녕하세요!")\nprint("내년에는 " + str(int(나이) + 1) + "살이 되시네요!")`,
+        input: `# 입력(input) 예제\nname = input("이름을 입력하세요: ")\nage = input("나이를 입력하세요: ")\nprint(name + "님, 안녕하세요!")\nprint("내년에는 " + str(int(age) + 1) + "살이 되시네요!")`,
 
-        loop: `# 반복문 예제\nfor i in range(1, 10):\n    for j in range(1, 10):\n        print(f"{i} x {j} = {i*j:2d}", end="  ")\n    print()`,
+        loop: `# 구구단 출력\nfor i in range(1, 10):\n    for j in range(1, 10):\n        result = str(i) + " x " + str(j) + " = " + str(i * j).rjust(2)\n        print(result, end="  ")\n    print()`,
 
-        function: `# 함수 예제\ndef 인사(이름, 횟수=3):\n    for i in range(횟수):\n        print(f"{i+1}번째 인사: 안녕, {이름}!")\n\n인사("파이썬")\nprint("---")\n인사("코딩", 2)`,
+        function: `# 함수 예제\ndef greet(name, count=3):\n    for i in range(count):\n        print(str(i + 1) + "번째 인사: 안녕, " + name + "!")\n\ngreet("파이썬")\nprint("---")\ngreet("코딩", 2)`,
 
-        list: `# 리스트 예제\n과일 = ["사과", "바나나", "체리", "딸기", "포도"]\n\nprint("== 과일 목록 ==")\nfor i, 이름 in enumerate(과일, 1):\n    print(f"  {i}. {이름}")\n\nprint(f"\\n총 {len(과일)}개의 과일이 있습니다.")\nprint(f"첫 번째: {과일[0]}")\nprint(f"마지막: {과일[-1]}")\n\n# 리스트 컴프리헨션\n긴과일 = [f for f in 과일 if len(f) >= 2]\nprint(f"\\n2글자 이상 과일: {긴과일}")`,
+        list: `# 리스트 예제\nfruits = ["사과", "바나나", "체리", "딸기", "포도"]\n\nprint("== 과일 목록 ==")\nfor i in range(len(fruits)):\n    print("  " + str(i + 1) + ". " + fruits[i])\n\nprint("")\nprint("총 " + str(len(fruits)) + "개의 과일이 있습니다.")\nprint("첫 번째: " + fruits[0])\nprint("마지막: " + fruits[-1])\n\n# 리스트 컴프리헨션\nlong_fruits = [x for x in fruits if len(x) >= 2]\nprint("")\nprint("2글자 이상 과일: " + str(long_fruits))`,
 
-        turtle: `# 거북이 그래픽 - 다각형\nimport turtle\n\nt = turtle.Turtle()\nt.speed(8)\n\n색깔 = ["red", "blue", "green", "orange", "purple", "cyan"]\n\nfor i in range(6):\n    t.pencolor(색깔[i])\n    t.pensize(3)\n    변 = i + 3  # 삼각형부터 팔각형까지\n    for j in range(변):\n        t.forward(60)\n        t.left(360 / 변)\n    t.penup()\n    t.forward(80)\n    t.pendown()`,
+        turtle: `# 거북이 그래픽 - 다각형\nimport turtle\n\nt = turtle.Turtle()\nt.speed(8)\n\ncolors = ["red", "blue", "green", "orange", "purple", "cyan"]\n\nfor i in range(6):\n    t.pencolor(colors[i])\n    t.pensize(3)\n    sides = i + 3\n    for j in range(sides):\n        t.forward(60)\n        t.left(360 / sides)\n    t.penup()\n    t.forward(80)\n    t.pendown()`,
 
         turtle2: `# 거북이 그래픽 - 컬러 나선\nimport turtle\n\nt = turtle.Turtle()\nt.speed(0)\n\nfor i in range(200):\n    r = i * 255 // 200\n    g = (200 - i) * 255 // 200\n    b = 128\n    t.pencolor(r / 255.0, g / 255.0, b / 255.0)\n    t.pensize(max(1, i // 40))\n    t.forward(i * 0.8)\n    t.left(59)`,
 
-        game: `# 숫자 맞추기 게임\nimport random\n\nprint("=== 숫자 맞추기 게임 ===")\nprint("1부터 20 사이의 숫자를 맞춰보세요!\\n")\n\n정답 = random.randint(1, 20)\n시도 = 0\n\nwhile True:\n    시도 += 1\n    추측 = int(input(f"[{시도}번째 시도] 숫자를 입력하세요: "))\n    \n    if 추측 < 정답:\n        print("  ↑ 더 큰 숫자입니다!")\n    elif 추측 > 정답:\n        print("  ↓ 더 작은 숫자입니다!")\n    else:\n        print(f"\\n🎉 정답! {시도}번 만에 맞추셨습니다!")\n        break`
+        game: `# 숫자 맞추기 게임\nimport random\n\nprint("=== 숫자 맞추기 게임 ===")\nprint("1부터 20 사이의 숫자를 맞춰보세요!")\nprint("")\n\nanswer = random.randint(1, 20)\ntries = 0\n\nwhile True:\n    tries = tries + 1\n    guess = int(input("[" + str(tries) + "번째 시도] 숫자를 입력하세요: "))\n    \n    if guess < answer:\n        print("  ↑ 더 큰 숫자입니다!")\n    elif guess > answer:\n        print("  ↓ 더 작은 숫자입니다!")\n    else:\n        print("")\n        print("정답! " + str(tries) + "번 만에 맞추셨습니다!")\n        break`
     };
 
     examplesBtn.addEventListener('click', (e) => {
