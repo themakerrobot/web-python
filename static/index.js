@@ -140,11 +140,24 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('fullscreenchange', updateFsIcon);
 
     // ============================
-    // Turtle Panel Show/Hide
+    // Tab Switching
     // ============================
-    function showTurtlePanel(visible) {
-        const turtlePanel = $('#turtle-panel');
-        turtlePanel.style.display = visible ? 'flex' : 'none';
+    $$('.tab-btn').forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.dataset.tab;
+            $$('.tab-btn').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            $$('.tab-panel').forEach(p => p.classList.remove('active'));
+            $(`#${target}-panel`).classList.add('active');
+        });
+    });
+
+    function switchTab(tabName) {
+        $$('.tab-btn').forEach(t => {
+            t.classList.toggle('active', t.dataset.tab === tabName);
+        });
+        $$('.tab-panel').forEach(p => p.classList.remove('active'));
+        $(`#${tabName}-panel`).classList.add('active');
     }
 
     // ============================
@@ -287,11 +300,11 @@ document.addEventListener('DOMContentLoaded', () => {
             editor.focus();
             examplesMenu.classList.remove('show');
 
-            // Show turtle panel for turtle examples
+            // Auto-switch tab for turtle examples
             if (key === 'turtle' || key === 'turtle2') {
-                showTurtlePanel(true);
+                switchTab('turtle');
             } else {
-                showTurtlePanel(false);
+                switchTab('console');
             }
 
             showToast('예제를 불러왔습니다');
@@ -404,9 +417,9 @@ document.addEventListener('DOMContentLoaded', () => {
         outputContent.innerHTML = '';
         inputArea.style.display = 'none';
 
-        // Show turtle panel if turtle code
+        // Switch to console tab (or turtle if turtle code)
         const hasTurtle = /import\s+turtle|from\s+turtle\s+import/.test(code);
-        showTurtlePanel(hasTurtle);
+        switchTab(hasTurtle ? 'turtle' : 'console');
 
         // Configure Skulpt
         Sk.execLimit = 60 * 1000;
@@ -422,7 +435,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 return Sk.builtinFiles['files'][filename];
             },
             inputfun: function(promptText) {
-                    return new Promise((resolve) => {
+                return new Promise((resolve) => {
+                    // Show in console tab for input
+                    switchTab('console');
 
                     if (promptText) {
                         appendOutput(promptText);
@@ -462,6 +477,7 @@ document.addEventListener('DOMContentLoaded', () => {
             finishRun();
         }).catch(function(err) {
             const elapsed = ((performance.now() - startTime) / 1000).toFixed(2);
+            switchTab('console');
             appendOutput('\n');
             appendOutput(formatError(err), 'error-line');
             setStatus('오류 발생', 'error');
