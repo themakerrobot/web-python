@@ -636,15 +636,14 @@ html, body {
 }
 
 #turtle canvas {
-    max-width: 100%;
-    max-height: 100%;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
 }
 
-#turtle canvas:nth-child(2) {
-    position: absolute;
+#turtle canvas ~ canvas {
+    position: absolute !important;
     box-shadow: none;
+    border-radius: var(--radius-md);
 }
 
 /* ===== Toast ===== */
