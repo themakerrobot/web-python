@@ -632,13 +632,27 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
-#turtle canvas {
-    max-width: 100%;
-    max-height: 100%;
+#turtle .turtle-canvas-wrapper {
+    position: relative;
+    display: inline-block;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
+    overflow: hidden;
+}
+
+#turtle .turtle-canvas-wrapper canvas {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin-top: 0 !important;
+    display: block !important;
+}
+
+#turtle .turtle-canvas-wrapper canvas:first-child {
+    position: relative !important;
 }
 
 /* ===== Toast ===== */

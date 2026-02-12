@@ -464,7 +464,17 @@ document.addEventListener('DOMContentLoaded', () => {
             inputfunTakesPrompt: true,
         });
 
-        (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'turtle';
+        (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'turtle-target';
+        Sk.TurtleGraphics.width = 400;
+        Sk.TurtleGraphics.height = 400;
+
+        // Prepare turtle canvas wrapper
+        const turtleEl = document.getElementById('turtle');
+        turtleEl.innerHTML = '';
+        const wrapper = document.createElement('div');
+        wrapper.className = 'turtle-canvas-wrapper';
+        wrapper.id = 'turtle-target';
+        turtleEl.appendChild(wrapper);
 
         Sk.misceval.asyncToPromise(function() {
             return Sk.importMainWithBody('<stdin>', false, code, true);
