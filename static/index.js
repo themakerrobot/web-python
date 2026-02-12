@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let isRunning = false;
     let fontSize = 18;
     let startTime = null;
-    let _canvasStackInterval = null;
 
     // ============================
     // DOM Refs
@@ -467,27 +466,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = 'turtle';
 
-        // Overlay multiple turtle canvases (Skulpt creates separate draw + sprite canvases)
-        const turtleContainer = $('#turtle');
-        function stackCanvases() {
-            const canvases = turtleContainer.querySelectorAll('canvas');
-            if (canvases.length >= 2) {
-                const first = canvases[0];
-                for (let i = 1; i < canvases.length; i++) {
-                    const c = canvases[i];
-                    c.style.position = 'absolute';
-                    c.style.left = first.offsetLeft + 'px';
-                    c.style.top = first.offsetTop + 'px';
-                    c.style.pointerEvents = 'none';
-                }
-            }
-        }
-        const canvasObserver = new MutationObserver(() => {
-            requestAnimationFrame(() => requestAnimationFrame(stackCanvases));
-        });
-        canvasObserver.observe(turtleContainer, { childList: true, subtree: true });
-        _canvasStackInterval = setInterval(stackCanvases, 200);
-
         Sk.misceval.asyncToPromise(function() {
             return Sk.importMainWithBody('<stdin>', false, code, true);
         }).then(function() {
@@ -514,10 +492,6 @@ document.addEventListener('DOMContentLoaded', () => {
         runBtn.querySelector('.play-icon').style.display = '';
         stopBtn.disabled = true;
         inputArea.style.display = 'none';
-        if (_canvasStackInterval) {
-            clearInterval(_canvasStackInterval);
-            _canvasStackInterval = null;
-        }
     }
 
     function stopCode() {
