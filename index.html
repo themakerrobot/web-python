@@ -42,8 +42,8 @@
                         <div class="dropdown-item" data-example="loop">🔁 반복문 예제</div>
                         <div class="dropdown-item" data-example="function">⚙️ 함수 예제</div>
                         <div class="dropdown-item" data-example="list">📋 리스트 예제</div>
-                        <div class="dropdown-item" data-example="turtle">🐢 거북이 그래픽</div>
-                        <div class="dropdown-item" data-example="turtle2">🌀 거북이 나선</div>
+                        <div class="dropdown-item" data-example="turtle">🤖 로봇 그래픽</div>
+                        <div class="dropdown-item" data-example="turtle2">🌀 로봇 나선</div>
                         <div class="dropdown-item" data-example="game">🎲 숫자 맞추기 게임</div>
                     </div>
                 </div>
@@ -117,14 +117,9 @@
             <!-- Output Panel -->
             <div class="panel output-panel" id="output-panel">
                 <div class="panel-header">
-                    <div class="output-tabs">
-                        <button class="tab-btn active" data-tab="console">
-                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-                            콘솔
-                        </button>
-                        <button class="tab-btn" data-tab="turtle">
-                            🐢 거북이
-                        </button>
+                    <div class="panel-title">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                        <span>출력</span>
                     </div>
                     <button id="clear-btn" class="action-btn clear-button" title="출력 지우기">
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
@@ -132,15 +127,15 @@
                     </button>
                 </div>
                 <div class="output-area">
-                    <div id="console-panel" class="tab-panel active">
+                    <div id="turtle-panel">
+                        <div id="turtle"></div>
+                    </div>
+                    <div id="console-panel">
                         <div id="output-content"></div>
                         <div id="input-area" style="display:none">
                             <span id="input-prompt"></span>
                             <input type="text" id="input-field" autocomplete="off" spellcheck="false" />
                         </div>
-                    </div>
-                    <div id="turtle-panel" class="tab-panel">
-                        <div id="turtle"></div>
                     </div>
                 </div>
             </div>
