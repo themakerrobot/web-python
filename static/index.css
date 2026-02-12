@@ -313,49 +313,6 @@ html, body {
 }
 
 /* ===== Tabs ===== */
-.output-tabs {
-    display: flex;
-    gap: 2px;
-}
-
-.tab-btn {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    padding: 6px 12px;
-    background: transparent;
-    color: var(--text-secondary);
-    border: none;
-    border-radius: var(--radius-sm);
-    font-family: var(--font-ui);
-    font-size: 12.5px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    position: relative;
-}
-
-.tab-btn:hover {
-    color: var(--text-primary);
-    background: var(--bg-hover);
-}
-
-.tab-btn.active {
-    color: var(--accent-blue);
-    background: var(--bg-tertiary);
-}
-
-.tab-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 6px;
-    right: 6px;
-    height: 2px;
-    background: var(--accent-blue);
-    border-radius: 2px 2px 0 0;
-}
-
 /* ===== Action Buttons (Run/Stop/Clear) ===== */
 .action-btn {
     display: inline-flex;
@@ -530,19 +487,10 @@ html, body {
 /* ===== Output Area ===== */
 .output-area {
     flex: 1;
-    overflow: hidden;
-    position: relative;
-}
-
-.tab-panel {
-    display: none;
-    height: 100%;
-    overflow: auto;
-}
-
-.tab-panel.active {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    position: relative;
 }
 
 /* Console */
@@ -552,6 +500,9 @@ html, body {
     font-family: var(--font-mono);
     font-size: 14px;
     line-height: 1.7;
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
 }
 
 #output-content {
@@ -613,17 +564,16 @@ html, body {
     border-bottom-color: var(--accent-blue);
 }
 
-/* Turtle Panel */
+/* Turtle Panel - inline in output */
 #turtle-panel {
     background: #fff;
     display: none;
     align-items: center;
     justify-content: center;
     padding: 10px;
-}
-
-#turtle-panel.active {
-    display: flex;
+    border-bottom: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+    max-height: 55%;
 }
 
 #turtle {
